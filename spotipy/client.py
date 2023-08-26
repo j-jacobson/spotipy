@@ -1295,7 +1295,11 @@ class Spotify(object):
         tlist = []
         if tracks is not None:
             tlist = [self._get_id("track", t) for t in tracks]
-        return self._put("me/tracks/?ids=" + ",".join(tlist))
+        payload = {
+            'ids': tlist
+        }
+
+        return self._put(url="me/tracks", payload=payload)
 
     def current_user_saved_tracks_delete(self, tracks=None):
         """ Remove one or more tracks from the current user's
